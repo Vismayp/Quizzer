@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7ie2tFh7MS0pQmH1jqgZm6+w2B1N5ONut8/"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <style>
+      body {
+        background-color: #f4f6f9; /* Light gray-blue background */
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+      .quiz-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .quiz-header {
+        text-align: center;
+        color: #4a90e2;
+        font-weight: bold;
+      }
+      .timer {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+      .question {
+        margin-bottom: 20px;
+      }
+      .question p {
+        font-weight: 600;
+      }
+      .options {
+        list-style: none;
+        padding: 0;
+      }
+      .options label {
+        display: block;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        transition: background-color 0.3s, transform 0.2s;
+      }
+      .options label:hover {
+        background-color: #e9ecef;
+        transform: translateY(-2px);
+      }
+      .options input[type="radio"] {
+        margin-right: 10px;
+      }
+      .btn-submit {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: white;
+        background-color: #4a90e2;
+        border: none;
+        border-radius: 5px;
+        transition: transform 0.2s, background-color 0.2s;
+      }
+      .btn-submit:hover {
+        transform: scale(1.05);
+        background-color: #357abd;
+      }
+    </style>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="quiz-container">
+      <h1 class="quiz-header">Quiz</h1>
+      <p class="timer">
+        Time Remaining: <span id="timer">{{ timer }}</span> minutes
+      </p>
+
+      <form method="POST" action="{% url 'result' %}">
+        {% csrf_token %}
+        <!-- Loop through questions -->
+        {% for question in questions %}
+        <div class="question">
+          <p>Q{{ forloop.counter }}: {{ question.question_text }}</p>
+          <ul class="options">
+            <li>
+              <label>
+                <input type="radio" name="{{ question.id }}" value="1" />
+                {{ question.option1 }}
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="{{ question.id }}" value="2" />
+                {{ question.option2 }}
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="{{ question.id }}" value="3" />
+                {{ question.option3 }}
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="{{ question.id }}" value="4" />
+                {{ question.option4 }}
+              </label>
+            </li>
+          </ul>
+        </div>
+        {% endfor %}
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
