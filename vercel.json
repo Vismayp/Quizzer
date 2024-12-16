@@ -1,5 +1,8 @@
 {
   "version": 2,
-  "builds": [{ "src": "quiz_app/wsgi.py", "use": "@vercel/python" }],
+  "builds": [
+    { "src": "quiz_app/wsgi.py", "use": "@vercel/python" },
+    { "src": "db.sqlite3", "use": "@vercel/static" }
+  ],
   "routes": [{ "src": "/(.*)", "dest": "quiz_app/wsgi.py" }]
 }
