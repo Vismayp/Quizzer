@@ -22,12 +22,14 @@ Deployment: Vercel
 To run this project locally, follow these steps:
 
 Clone the Repository
-git clone https://github.com/yourusername/quizzer.git
+git clone https://github.com/Vismayp/Quizzer
+
 cd quizzer
 
 Create a Virtual Environment
 python -m venv venv
-source venv/bin/activate    # On Windows: venv\Scripts\activate
+source venv/bin/activate    
+On Windows: venv\Scripts\activate
 
 Install Dependencies
 pip install django
